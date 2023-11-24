@@ -1,5 +1,6 @@
 from base64 import b64encode
 from os import environ
+from typing import Any, Dict
 
 import requests
 from dotenv import load_dotenv
@@ -27,44 +28,42 @@ def generate_credentials() -> str:
     return b64encode(credentials.encode()).decode("utf-8")
 
 
+def post_api_token(data: Dict[str, str]) -> Dict[str, Any]:
+    response = requests.post(
+        "https://accounts.spotify.com/api/token",
+        data=data,
+        headers={
+            "Authorization": "Basic " + generate_credentials(),
+        },
+    )
+    response.raise_for_status()
+    return response.json()
+
+
 @app.route("/")
 def hello() -> Response:
     if REFRESH_TOKEN:
-        data = {
-            "grant_type": "refresh_token",
-            "refresh_token": REFRESH_TOKEN,
-        }
-        headers = {
-            "Authorization": "Basic " + generate_credentials(),
-        }
-
-        response = requests.post(
-            "https://accounts.spotify.com/api/token",
-            data=data,
-            headers=headers,
+        return jsonify(
+            post_api_token(
+                {
+                    "grant_type": "refresh_token",
+                    "refresh_token": REFRESH_TOKEN,
+                }
+            )
         )
-        response.raise_for_status()
-        return jsonify(response.json())
 
     code = request.args.get("code")
 
     if code:
-        data = {
-            "grant_type": "authorization_code",
-            "code": code,
-            "redirect_uri": URL,
-        }
-        headers = {
-            "Authorization": "Basic " + generate_credentials(),
-        }
-
-        response = requests.post(
-            "https://accounts.spotify.com/api/token",
-            data=data,
-            headers=headers,
+        return jsonify(
+            post_api_token(
+                {
+                    "grant_type": "authorization_code",
+                    "code": code,
+                    "redirect_uri": URL,
+                }
+            )
         )
-        response.raise_for_status()
-        return jsonify(response.json())
 
     return redirect(
         AUTHORIZE_URL.format(
