@@ -66,8 +66,31 @@ spotify.get_profile()
 
 #### Get User's Top Items
 
+```python
+from spotify.constants.enum.item_type import ItemType
+from spotify.constants.enum.time_range import TimeRange
+
+# artists
+spotify.get_top_items(ItemType.ARTISTS, time_range = TimeRange.LONG_TERM, limit=1)
+
+# tracks
+spotify.get_top_items(ItemType.TRACKS, limit=1, offset=1)
+```
+
 #### Get User's Profile
 
 ```python
 spotify.get_user("smedjan")
+```
+
+#### Follow Playlist
+
+```python
+spotify.follow_playlist("3cEYpjA9oz9GiPac4AsH4n", True)
+```
+
+#### Unfollow Playlist
+
+```python
+spotify.unfollow_playlist("3cEYpjA9oz9GiPac4AsH4n")
 ```
