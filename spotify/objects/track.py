@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from dataclasses import dataclass, field
 from typing import Any, Dict, List
 
@@ -26,7 +28,7 @@ class Track:
     external_urls: Dict[str, str] = field(default_factory=dict)
 
     @classmethod
-    def from_dict(cls, d: Dict[str, Any]) -> Album:
+    def from_dict(cls, d: Dict[str, Any]) -> Track:
         artists: List[Dict[str, Any]] = d.pop("artists")
         d["artists"] = [Artist.from_dict(artist) for artist in artists]
         d["album"] = Album.from_dict(d["album"])
