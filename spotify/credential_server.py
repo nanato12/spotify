@@ -3,7 +3,7 @@ from os import environ
 
 import requests
 from dotenv import load_dotenv
-from flask import Flask, redirect, request
+from flask import Flask, Response, jsonify, redirect, request
 
 HOST = "127.0.0.1"
 PORT = 5000
@@ -28,7 +28,7 @@ def generate_credentials() -> str:
 
 
 @app.route("/")
-def hello():
+def hello() -> Response:
     if REFRESH_TOKEN:
         data = {
             "grant_type": "refresh_token",
@@ -44,7 +44,7 @@ def hello():
             headers=headers,
         )
         response.raise_for_status()
-        return response.json()
+        return jsonify(response.json())
 
     code = request.args.get("code")
 
@@ -64,7 +64,7 @@ def hello():
             headers=headers,
         )
         response.raise_for_status()
-        return response.json()
+        return jsonify(response.json())
 
     return redirect(
         AUTHORIZE_URL.format(
