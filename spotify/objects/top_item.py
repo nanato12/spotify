@@ -21,7 +21,7 @@ class TopItem:
     def from_dict(cls, d: Dict[str, Any]) -> TopItem:
         if d.get("items"):
             items: List[Dict[str, Any]] = d.pop("items")
-            result_items = []
+            result_items: List[Union[Artist, Track]] = []
             result_items.extend(
                 [
                     Artist.from_dict(item)
