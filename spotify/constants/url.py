@@ -6,4 +6,5 @@ class URL:
 
     V1_HOST = urljoin(HOST, "v1")
 
-    ME = f"{V1_HOST}/me"
+    ME = V1_HOST + "/me"
+    USERS = V1_HOST + "/users/{user_id}"
