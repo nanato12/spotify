@@ -1,10 +1,10 @@
 from dataclasses import dataclass
-from profile import Profile
 from typing import Dict, Type, TypeVar
 
 import requests
 
 from spotify.constants.url import URL
+from spotify.objects.profile import Profile
 
 T = TypeVar("T")
 
