@@ -11,7 +11,7 @@ class Profile:
     type: str
     href: str
     uri: str
-    external_urls: Dict[str, str] = field(default_factory=list)
+    external_urls: Dict[str, str] = field(default_factory=dict)
     images: List[Dict[str, Any]] = field(default_factory=list)
     followers: Dict[str, Any] = field(default_factory=dict)
 
