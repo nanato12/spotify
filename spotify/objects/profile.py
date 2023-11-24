@@ -8,7 +8,7 @@ class Profile:
     external_urls: Dict[str, str]
     href: str
     id: str
-    images: List[str]
+    images: List[Dict[str, Any]]
     type: str
     uri: str
     followers: Dict[str, Any]
