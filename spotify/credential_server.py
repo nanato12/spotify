@@ -37,7 +37,8 @@ def post_api_token(data: Dict[str, str]) -> Dict[str, Any]:
         },
     )
     response.raise_for_status()
-    return response.json()
+    j: Dict[str, Any] = response.json()
+    return j
 
 
 @app.route("/")
