@@ -20,7 +20,6 @@ clear:
 add-pkg:
 	pip freeze | grep ${NAME} >> requirements.txt
 
-
 .PHONY: run
 run:
 	python main.py
