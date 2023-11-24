@@ -8,7 +8,7 @@
 $ make init
 ```
 
-## 1. Spotifyのアプリを作成
+### 1. Spotifyのアプリを作成
 
 以下のURLからアプリを作成する。
 
@@ -20,7 +20,7 @@ $ make init
 
 作成したアプリの `settings` を開き、 `Client ID` と `Client secret` を `.env` に転記する（**CLIENT_ID**, **CLIENT_SECRET**）。
 
-## 2. ローカルの認証サーバーを建てる
+### 2. ローカルの認証サーバーを建てる
 
 ```bash
 $ python server.py
@@ -30,8 +30,44 @@ $ python server.py
 
 画面にリフレッシュトークンが出てくるので、 `.env` に転記する（**REFRESH_TOKEN**）。
 
-## 3. アクセストークンの取得
+### 3. アクセストークンの取得
 
 サーバー起動状態で、`127.0.0.1:5000` にアクセスするとアクセストークンが表示される。
 
 `.env` に転記する（**ACCESS_TOKEN**）。
+
+## Documentation
+
+基本的に以下の `Web API` を実装する。
+
+<https://developer.spotify.com/documentation/web-api>
+
+### 初期化
+
+```python
+from os import environ
+
+from dotenv import load_dotenv
+
+from spotify import Spotify
+
+load_dotenv(verbose=True)
+
+spotify = Spotify(environ["ACCESS_TOKEN"])
+```
+
+### Users
+
+#### Get Current User's Profile
+
+```python
+spotify.get_profile()
+```
+
+#### Get User's Top Items
+
+#### Get User's Profile
+
+```python
+spotify.get_user("smedjan")
+```
