@@ -28,3 +28,6 @@ class Spotify:
 
     def get_profile(self) -> Profile:
         return self.__get(URL.ME, Profile)
+
+    def get_user(self, user_id: str) -> Profile:
+        return self.__get(URL.USERS.format(user_id=user_id), Profile)
