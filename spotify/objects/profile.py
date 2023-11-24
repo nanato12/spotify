@@ -1,14 +1,22 @@
-from dataclasses import dataclass
+from __future__ import annotations
+
+from dataclasses import dataclass, field
 from typing import Any, Dict, List
 
 
 @dataclass
 class Profile:
-    display_name: str
-    external_urls: Dict[str, str]
-    href: str
     id: str
-    images: List[Dict[str, Any]]
+    name: str
     type: str
+    href: str
     uri: str
-    followers: Dict[str, Any]
+    external_urls: Dict[str, str] = field(default_factory=dict)
+    images: List[Dict[str, Any]] = field(default_factory=list)
+    followers: Dict[str, Any] = field(default_factory=dict)
+
+    @classmethod
+    def from_dict(cls, d: Dict[str, Any]) -> Profile:
+        if d.get("display_name"):
+            d["name"] = d.pop("display_name")
+        return cls(**d)
