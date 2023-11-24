@@ -7,4 +7,5 @@ from spotify import Spotify
 load_dotenv(verbose=True)
 
 spotify = Spotify(environ["ACCESS_TOKEN"])
-spotify.get_profile()
+print(spotify.get_profile())
+print(spotify.get_user("smedjan"))
