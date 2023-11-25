@@ -198,3 +198,21 @@ class Spotify:
             URL.FOLLOWING,
             params={"type": type_.value, "ids": ",".join(ids)},
         )
+
+    def is_follow(self, type_: ItemType, ids: List[str]) -> List[bool]:
+        if type_ not in [ItemType.ARTIST, ItemType.USER]:
+            raise ValueError(
+                "This API allows ItemType.ARTIST or ItemType.USER."
+            )
+        return self.__get(
+            URL.FOLLOWING_CONTAINS,
+            params={"type": type_.value, "ids": ",".join(ids)},
+        ).json()
+
+    def is_playlist_follow(
+        self, playlist_id: str, ids: List[str]
+    ) -> List[bool]:
+        return self.__get(
+            URL.PLAYLISTS_FOLLOWERS_CONTAINS.format(playlist_id=playlist_id),
+            params={"ids": ",".join(ids)},
+        ).json()
