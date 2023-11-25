@@ -61,3 +61,27 @@ print(spotify.get_top_items(ItemType.TRACK, limit=1, offset=1))
 
 # followed artists
 print(spotify.get_followed_artists(limit=1))
+
+# follow artists
+print(
+    spotify.follow_artist_or_user(
+        ItemType.ARTIST,
+        [
+            "2CIMQHirSU0MQqyYHq0eOx",
+            "57dN52uHvrHOxijzpIgu3E",
+            "1vCWHaC5f2uS3yhpwWbIA6",
+        ],
+    )
+)
+
+# unfollow artists
+print(
+    spotify.unfollow_artist_or_user(
+        ItemType.ARTIST,
+        [
+            "2CIMQHirSU0MQqyYHq0eOx",
+            "57dN52uHvrHOxijzpIgu3E",
+            "1vCWHaC5f2uS3yhpwWbIA6",
+        ],
+    )
+)
