@@ -65,10 +65,10 @@ from spotify.constants.enum.item_type import ItemType
 from spotify.constants.enum.time_range import TimeRange
 
 # artists
-spotify.get_top_items(ItemType.ARTISTS, time_range = TimeRange.LONG_TERM, limit=1)
+spotify.get_top_items(ItemType.ARTIST, time_range = TimeRange.LONG_TERM, limit=1)
 
 # tracks
-spotify.get_top_items(ItemType.TRACKS, limit=1, offset=1)
+spotify.get_top_items(ItemType.TRACK, limit=1, offset=1)
 ```
 
 #### Get User's Profile
