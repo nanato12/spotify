@@ -52,9 +52,9 @@ print(spotify.unfollow_playlist("3cEYpjA9oz9GiPac4AsH4n"))
 # artists
 print(
     spotify.get_top_items(
-        ItemType.ARTISTS, time_range=TimeRange.LONG_TERM, limit=1
+        ItemType.ARTIST, time_range=TimeRange.LONG_TERM, limit=1
     )
 )
 
 # tracks
-print(spotify.get_top_items(ItemType.TRACKS, limit=1, offset=1))
+print(spotify.get_top_items(ItemType.TRACK, limit=1, offset=1))

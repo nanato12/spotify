@@ -8,6 +8,8 @@ from spotify.constants.enum.scope import Scope
 
 scopes = [
     Scope.USER_TOP_READ,
+    Scope.USER_READ_PRIVATE,
+    Scope.USER_READ_EMAIL,
     Scope.PLAYLIST_MODIFY_PUBLIC,
     Scope.PLAYLIST_MODIFY_PRIVATE,
 ]
