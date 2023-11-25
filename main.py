@@ -1,14 +1,40 @@
-from os import environ
+from logging import DEBUG, basicConfig
+from logging.handlers import TimedRotatingFileHandler
+from os import environ, makedirs
 
 from dotenv import load_dotenv
 
 from spotify import Spotify
 from spotify.constants.enum.item_type import ItemType
 from spotify.constants.enum.time_range import TimeRange
+from spotify.logger import get_file_path_logger
 
 load_dotenv(verbose=True)
 
-spotify = Spotify(environ["ACCESS_TOKEN"])
+LOG_DIRECTORY = "logs"
+CLIENT_ID = environ["CLIENT_ID"]
+CLIENT_SECRET = environ["CLIENT_SECRET"]
+REFRESH_TOKEN = environ.get("REFRESH_TOKEN", "")
+
+logger = get_file_path_logger(__name__)
+
+makedirs(LOG_DIRECTORY, exist_ok=True)
+basicConfig(
+    level=DEBUG,
+    datefmt="%Y/%m/%d %H:%M:%S",
+    format="%(asctime)s [%(levelname)s] %(name)s:%(lineno)s %(message)s",
+    handlers=[
+        TimedRotatingFileHandler(
+            f"{LOG_DIRECTORY}/spotify.log",
+            when="midnight",
+            backupCount=30,
+            interval=1,
+            encoding="utf-8",
+        )
+    ],
+)
+
+spotify = Spotify(CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN)
 
 # show your profile
 print(spotify.get_profile())
