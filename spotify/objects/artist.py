@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Dict, List, Optional
 
+from spotify.constants.enum.item_type import ItemType
 from spotify.objects.profile import Profile
 
 
@@ -13,4 +14,5 @@ class Artist(Profile):
 
     @classmethod
     def from_dict(cls, d: Dict[str, Any]) -> Artist:
+        d["type"] = ItemType(d["type"])
         return cls(**d)
