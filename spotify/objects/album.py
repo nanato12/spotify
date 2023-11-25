@@ -3,17 +3,13 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Dict, List
 
-from spotify.objects import SpotifyObject
+from spotify.constants.enum.item_type import ItemType
+from spotify.objects import SpotifyObjectItem
 from spotify.objects.artist import Artist
 
 
 @dataclass
-class Album(SpotifyObject):
-    id: str
-    name: str
-    type: str
-    href: str
-    uri: str
+class Album(SpotifyObjectItem):
     album_type: str
     release_date: str
     release_date_precision: str
@@ -25,6 +21,7 @@ class Album(SpotifyObject):
 
     @classmethod
     def from_dict(cls, d: Dict[str, Any]) -> Album:
+        d["type"] = ItemType(d["type"])
         artists: List[Dict[str, Any]] = d.pop("artists")
         d["artists"] = [Artist.from_dict(artist) for artist in artists]
         return cls(**d)
