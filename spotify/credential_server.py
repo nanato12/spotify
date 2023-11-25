@@ -10,6 +10,7 @@ scopes = [
     Scope.USER_TOP_READ,
     Scope.USER_READ_PRIVATE,
     Scope.USER_READ_EMAIL,
+    Scope.USER_FOLLOW_READ,
     Scope.PLAYLIST_MODIFY_PUBLIC,
     Scope.PLAYLIST_MODIFY_PRIVATE,
 ]
