@@ -6,10 +6,13 @@ class URL:
     API_TOKEN = urljoin(ACCOUNT_HOST, "/api/token")
 
     API_HOST = "https://api.spotify.com"
-    V1_HOST = urljoin(API_HOST, "/v1")
 
-    ME = V1_HOST + "/me"
-    TOP_ITMES = ME + "/top/{type}"
-    USERS = V1_HOST + "/users/{user_id}"
+    LATEST_VERSION = "v1"
 
-    PLAYLISTS_FOLLOWERS = V1_HOST + "/playlists/{playlist_id}/followers"
+    ME = urljoin(API_HOST, LATEST_VERSION + "/me")
+    TOP_ITMES = urljoin(API_HOST, ME + "/top/{type}")
+    USERS = urljoin(API_HOST, LATEST_VERSION + "/users/{user_id}")
+
+    PLAYLISTS_FOLLOWERS = urljoin(
+        API_HOST, LATEST_VERSION + "/playlists/{playlist_id}/followers"
+    )
