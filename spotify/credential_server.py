@@ -4,12 +4,19 @@ from dotenv import load_dotenv
 from flask import Flask, Response, redirect, request
 
 from spotify import Spotify
+from spotify.constants.enum.scope import Scope
+
+scopes = [
+    Scope.USER_TOP_READ,
+    Scope.PLAYLIST_MODIFY_PUBLIC,
+    Scope.PLAYLIST_MODIFY_PRIVATE,
+]
 
 HOST = "127.0.0.1"
 PORT = 5000
 
 URL = f"http://{HOST}:{PORT}"
-SCOPE = "user-top-read"
+SCOPE = " ".join([s.value for s in scopes])
 
 load_dotenv(verbose=True)
 
