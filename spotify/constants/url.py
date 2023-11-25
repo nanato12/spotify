@@ -2,9 +2,11 @@ from urllib.parse import urljoin
 
 
 class URL:
-    HOST = "https://api.spotify.com"
+    ACCOUNT_HOST = "https://accounts.spotify.com"
+    API_TOKEN = urljoin(ACCOUNT_HOST, "/api/token")
 
-    V1_HOST = urljoin(HOST, "v1")
+    API_HOST = "https://api.spotify.com"
+    V1_HOST = urljoin(API_HOST, "/v1")
 
     ME = V1_HOST + "/me"
     TOP_ITMES = ME + "/top/{type}"
