@@ -115,7 +115,7 @@ class Spotify:
 
     def get_top_items(
         self,
-        type: ItemType,
+        type_: ItemType,
         time_range: TimeRange = TimeRange.MEDIUM_TERM,
         limit: int = 20,
         offset: int = 0,
@@ -125,7 +125,7 @@ class Spotify:
 
         return self.__convert(
             self.__get(
-                URL.TOP_ITMES.format(type=type.value),
+                URL.TOP_ITMES.format(type=type_.plural_value),
                 params={
                     "time_range": time_range.value,
                     "limit": limit,
