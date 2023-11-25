@@ -88,3 +88,9 @@ spotify.follow_playlist("3cEYpjA9oz9GiPac4AsH4n", True)
 ```python
 spotify.unfollow_playlist("3cEYpjA9oz9GiPac4AsH4n")
 ```
+
+#### Get Followed Artists
+
+```python
+print(spotify.get_followed_artists(limit=1))
+```
