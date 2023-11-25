@@ -23,3 +23,7 @@ add-pkg:
 .PHONY: run
 run:
 	python main.py
+
+.PHONY: server
+server:
+	python server.py
