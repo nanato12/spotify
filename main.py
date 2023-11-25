@@ -58,3 +58,6 @@ print(
 
 # tracks
 print(spotify.get_top_items(ItemType.TRACK, limit=1, offset=1))
+
+# followed artists
+print(spotify.get_followed_artists(limit=1))
