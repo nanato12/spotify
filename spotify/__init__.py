@@ -1,6 +1,6 @@
 from base64 import b64encode
 from dataclasses import dataclass, field
-from typing import Any, Dict, Optional, Type, TypeVar
+from typing import Any, Dict, List, Optional, Type, TypeVar
 
 import requests
 from requests import Response
@@ -72,13 +72,15 @@ class Spotify:
         self.__validate_response(r)
         return r
 
-    def __put(self, url: str, data: Dict[str, Any] = {}) -> Response:
-        r = requests.put(url, headers=self.headers, data=data)
+    def __put(
+        self, url: str, params: Dict[str, Any] = {}, data: Dict[str, Any] = {}
+    ) -> Response:
+        r = requests.put(url, headers=self.headers, params=params, data=data)
         self.__validate_response(r)
         return r
 
-    def __delete(self, url: str) -> Response:
-        r = requests.delete(url, headers=self.headers)
+    def __delete(self, url: str, params: Dict[str, Any] = {}) -> Response:
+        r = requests.delete(url, headers=self.headers, params=params)
         self.__validate_response(r)
         return r
 
@@ -171,4 +173,28 @@ class Spotify:
     def unfollow_playlist(self, playlist_id: str) -> Response:
         return self.__delete(
             URL.PLAYLISTS_FOLLOWERS.format(playlist_id=playlist_id),
+        )
+
+    def follow_artist_or_user(
+        self, type_: ItemType, ids: List[str]
+    ) -> Response:
+        if type_ not in [ItemType.ARTIST, ItemType.USER]:
+            raise ValueError(
+                "This API allows ItemType.ARTIST or ItemType.USER."
+            )
+        return self.__put(
+            URL.FOLLOWING,
+            params={"type": type_.value, "ids": ",".join(ids)},
+        )
+
+    def unfollow_artist_or_user(
+        self, type_: ItemType, ids: List[str]
+    ) -> Response:
+        if type_ not in [ItemType.ARTIST, ItemType.USER]:
+            raise ValueError(
+                "This API allows ItemType.ARTIST or ItemType.USER."
+            )
+        return self.__delete(
+            URL.FOLLOWING,
+            params={"type": type_.value, "ids": ",".join(ids)},
         )
