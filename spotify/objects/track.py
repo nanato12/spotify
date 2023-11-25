@@ -3,12 +3,13 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Dict, List
 
+from spotify.objects import SpotifyObject
 from spotify.objects.album import Album
 from spotify.objects.artist import Artist
 
 
 @dataclass
-class Track:
+class Track(SpotifyObject):
     id: str
     name: str
     type: str
