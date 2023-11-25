@@ -1,6 +1,6 @@
 from base64 import b64encode
 from dataclasses import dataclass, field
-from typing import Any, Dict, Type, TypeVar
+from typing import Any, Dict, Optional, Type, TypeVar
 
 import requests
 from requests import Response
@@ -11,10 +11,11 @@ from spotify.constants.enum.time_range import TimeRange
 from spotify.constants.url import URL
 from spotify.logger import get_file_path_logger
 from spotify.objects.api_token import ApiToken
+from spotify.objects.artists import Artists
 from spotify.objects.profile import Profile
 from spotify.objects.top_item import TopItem
 
-A = TypeVar("A", Profile, TopItem, ApiToken)
+A = TypeVar("A", Profile, TopItem, ApiToken, Artists)
 
 logger = get_file_path_logger(__name__)
 
@@ -50,6 +51,11 @@ class Spotify:
         except JSONDecodeError:
             j = {}
         logger.debug(j)
+
+    @staticmethod
+    def __validate_limit(limit: int) -> None:
+        if not 0 <= limit <= 50:
+            raise ValueError("'limit' must be between 0 and 50.")
 
     @staticmethod
     def __convert(r: Response, class_: Type[A]) -> A:
@@ -120,9 +126,7 @@ class Spotify:
         limit: int = 20,
         offset: int = 0,
     ) -> TopItem:
-        if not 0 <= limit <= 50:
-            raise ValueError("'limit' must be between 0 and 50.")
-
+        self.__validate_limit(limit)
         return self.__convert(
             self.__get(
                 URL.TOP_ITMES.format(type=type_.plural_value),
@@ -137,6 +141,19 @@ class Spotify:
 
     def get_profile(self) -> Profile:
         return self.__convert(self.__get(URL.ME), Profile)
+
+    def get_followed_artists(
+        self, after_artist_id: Optional[str] = None, limit: int = 20
+    ) -> Artists:
+        self.__validate_limit(limit)
+        params = {"type": ItemType.ARTIST.value, "limit": limit}
+        if after_artist_id:
+            params.update({"after": after_artist_id})
+
+        return self.__convert(
+            self.__get(URL.FOLLOWING, params=params),
+            Artists,
+        )
 
     def get_user(self, user_id: str) -> Profile:
         return self.__convert(
