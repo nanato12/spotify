@@ -43,7 +43,11 @@ from spotify import Spotify
 
 load_dotenv(verbose=True)
 
-spotify = Spotify(environ["ACCESS_TOKEN"])
+CLIENT_ID = environ["CLIENT_ID"]
+CLIENT_SECRET = environ["CLIENT_SECRET"]
+REFRESH_TOKEN = environ.get("REFRESH_TOKEN", "")
+
+spotify = Spotify(CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN)
 ```
 
 ### Users
