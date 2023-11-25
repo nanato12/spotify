@@ -35,6 +35,7 @@ basicConfig(
 )
 
 spotify = Spotify(CLIENT_ID, CLIENT_SECRET, REFRESH_TOKEN)
+logger.debug(spotify)
 
 # show your profile
 print(spotify.get_profile())
