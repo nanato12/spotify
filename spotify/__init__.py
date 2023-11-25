@@ -204,15 +204,17 @@ class Spotify:
             raise ValueError(
                 "This API allows ItemType.ARTIST or ItemType.USER."
             )
-        return self.__get(
+        j: List[bool] = self.__get(
             URL.FOLLOWING_CONTAINS,
             params={"type": type_.value, "ids": ",".join(ids)},
         ).json()
+        return j
 
     def is_playlist_follow(
         self, playlist_id: str, ids: List[str]
     ) -> List[bool]:
-        return self.__get(
+        j: List[bool] = self.__get(
             URL.PLAYLISTS_FOLLOWERS_CONTAINS.format(playlist_id=playlist_id),
             params={"ids": ",".join(ids)},
         ).json()
+        return j
