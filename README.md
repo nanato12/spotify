@@ -16,7 +16,7 @@ $ make init
 
 Open `settings` of the created app and transcribe `Client ID` and `Client secret` to `.env` (**CLIENT_ID**, **CLIENT_SECRET**).
 
-### 2. Build a local authenticatio callback server
+### 2. Build a local authentication callback server
 
 ```bash
 $ python server.py
