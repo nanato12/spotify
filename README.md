@@ -92,5 +92,31 @@ spotify.unfollow_playlist("3cEYpjA9oz9GiPac4AsH4n")
 #### Get Followed Artists
 
 ```python
-print(spotify.get_followed_artists(limit=1))
+spotify.get_followed_artists(limit=1)
+```
+
+#### Follow Artists or Users
+
+```python
+spotify.follow_artist_or_user(
+    ItemType.ARTIST,
+    [
+        "2CIMQHirSU0MQqyYHq0eOx",
+        "57dN52uHvrHOxijzpIgu3E",
+        "1vCWHaC5f2uS3yhpwWbIA6",
+    ],
+)
+```
+
+#### Unfollow Artists or Users
+
+```python
+spotify.unfollow_artist_or_user(
+    ItemType.ARTIST,
+    [
+        "2CIMQHirSU0MQqyYHq0eOx",
+        "57dN52uHvrHOxijzpIgu3E",
+        "1vCWHaC5f2uS3yhpwWbIA6",
+    ],
+)
 ```
