@@ -11,6 +11,8 @@ class URL:
 
     ME = urljoin(API_HOST, LATEST_VERSION + "/me")
     TOP_ITMES = urljoin(API_HOST, ME + "/top/{type}")
+    FOLLOWING = urljoin(API_HOST, ME + "/following")
+
     USERS = urljoin(API_HOST, LATEST_VERSION + "/users/{user_id}")
 
     PLAYLISTS_FOLLOWERS = urljoin(
