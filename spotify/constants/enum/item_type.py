@@ -7,7 +7,6 @@ class ItemType(Enum):
     TRACK = "track"
     ALBUM = "album"
 
-
-class PluralItemType(Enum):
-    ARTISTS = "artists"
-    TRACKS = "tracks"
+    @property
+    def plural_value(self) -> str:
+        return f"{self.value}s"
