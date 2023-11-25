@@ -120,3 +120,24 @@ spotify.unfollow_artist_or_user(
     ],
 )
 ```
+
+#### Check If User Follows Artists or Users
+
+```python
+spotify.is_follow(
+    ItemType.ARTIST,
+    [
+        "2CIMQHirSU0MQqyYHq0eOx",
+        "57dN52uHvrHOxijzpIgu3E",
+        "1vCWHaC5f2uS3yhpwWbIA6",
+    ],
+)
+```
+
+#### Check if Users Follow Playlist
+
+```python
+spotify.is_playlist_follow(
+    "3cEYpjA9oz9GiPac4AsH4n", ["jmperezperez", "thelinmichael", "wizzler"]
+)
+```
