@@ -4,6 +4,7 @@ from typing import Any, Dict, Type, TypeVar
 
 import requests
 from requests import Response
+from requests.exceptions import JSONDecodeError
 
 from spotify.constants.enum.item_type import ItemType
 from spotify.constants.enum.time_range import TimeRange
@@ -44,7 +45,11 @@ class Spotify:
     @staticmethod
     def __validate_response(r: Response) -> None:
         r.raise_for_status()
-        logger.debug(r.json())
+        try:
+            j = r.json()
+        except JSONDecodeError:
+            j = {}
+        logger.debug(j)
 
     @staticmethod
     def __convert(r: Response, class_: Type[A]) -> A:
