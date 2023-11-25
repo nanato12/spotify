@@ -3,9 +3,11 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Dict, List
 
+from spotify.objects import SpotifyObject
+
 
 @dataclass
-class Profile:
+class Profile(SpotifyObject):
     id: str
     name: str
     type: str

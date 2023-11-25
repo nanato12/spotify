@@ -3,12 +3,13 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional, Union
 
+from spotify.objects import SpotifyObject
 from spotify.objects.artist import Artist
 from spotify.objects.track import Track
 
 
 @dataclass
-class TopItem:
+class TopItem(SpotifyObject):
     items: List[Union[Artist, Track]]
     total: int
     limit: int
